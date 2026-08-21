@@ -1,0 +1,14 @@
+README.md
+  h_7225d40a6d1eb9 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "bc108fc153516999c0b0294006bc44be7acdc97b",
+  "prompts": {},
+  "humans": {
+    "h_7225d40a6d1eb9": {
+      "author": "Appasamudram Naga Mohith (amohith) <amohith@cisco.com>"
+    }
+  }
+}
