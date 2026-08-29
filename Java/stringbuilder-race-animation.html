@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StringBuilder vs StringBuffer — Why Characters Get Lost</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #1a2332;
+      --border: #2d3a4f;
+      --text: #e6edf3;
+      --muted: #8b9cb3;
+      --builder: #f0883e;
+      --buffer: #3fb950;
+      --thread1: #58a6ff;
+      --thread2: #d2a8ff;
+      --danger: #ff7b72;
+      --warn: #e3b341;
+      --slot: #21262d;
+      --slot-fill: #388bfd33;
+      --lock: #3fb950;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+      max-width: 820px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1100px;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .panel.builder { border-top: 3px solid var(--builder); }
+    .panel.buffer  { border-top: 3px solid var(--buffer); }
+
+    .panel h2 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .panel .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tag.unsafe { background: #f0883e22; color: var(--builder); }
+    .tag.safe   { background: #3fb95022; color: var(--buffer); }
+
+    .state-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .count-box {
+      background: var(--slot);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      min-width: 100px;
+    }
+
+    .count-box span { color: var(--muted); font-size: 0.75rem; display: block; }
+    .count-box strong { font-size: 1.4rem; color: var(--warn); }
+
+    .lock-box {
+      background: var(--slot);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+    }
+
+    .lock-box.locked { border-color: var(--lock); background: #3fb95018; }
+    .lock-box.unlocked { border-color: var(--danger); background: #ff7b7218; }
+
+    .buffer-visual {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+      min-height: 52px;
+    }
+
+    .cell {
+      width: 36px;
+      height: 40px;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      background: var(--slot);
+      color: var(--muted);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .cell.filled {
+      background: var(--slot-fill);
+      border-color: #58a6ff66;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .cell.lost {
+      background: #ff7b7222;
+      border-color: var(--danger);
+      color: var(--danger);
+      animation: pulse 0.6s ease;
+    }
+
+    .cell.highlight-t1 { box-shadow: 0 0 0 2px var(--thread1); }
+    .cell.highlight-t2 { box-shadow: 0 0 0 2px var(--thread2); }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .threads {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .thread {
+      border-radius: 8px;
+      padding: 10px 12px;
+      border-left: 3px solid;
+      background: #00000033;
+      font-size: 0.78rem;
+    }
+
+    .thread.t1 { border-color: var(--thread1); }
+    .thread.t2 { border-color: var(--thread2); }
+    .thread .name { font-weight: 700; margin-bottom: 4px; }
+    .thread.t1 .name { color: var(--thread1); }
+    .thread.t2 .name { color: var(--thread2); }
+
+    .step-log {
+      margin-top: 14px;
+      background: #00000044;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      min-height: 88px;
+      color: var(--muted);
+    }
+
+    .step-log .active { color: var(--text); }
+    .step-log .bad { color: var(--danger); }
+    .step-log .good { color: var(--buffer); }
+
+    .controls {
+      max-width: 1100px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 0.82rem;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #21262d;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button:hover { background: #30363d; }
+    button.primary { background: #238636; border-color: #238636; }
+    button.primary:hover { background: #2ea043; }
+
+    .explain {
+      max-width: 1100px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 8px;
+    }
+
+    .explain h3 { font-size: 0.9rem; margin-bottom: 10px; }
+
+    .explain ol {
+      margin-left: 18px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .explain li { margin-bottom: 8px; }
+    .explain strong { color: var(--text); }
+
+    .result-bar {
+      max-width: 1100px;
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    .timeline {
+      max-width: 1100px;
+      margin: 20px 0 8px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .timeline h3 { font-size: 0.9rem; margin-bottom: 12px; }
+
+    .timeline-track {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 6px 12px;
+      font-size: 0.75rem;
+    }
+
+    .timeline-label { color: var(--muted); text-align: right; padding-top: 6px; }
+    .timeline-events { display: flex; gap: 4px; flex-wrap: wrap; min-height: 28px; }
+
+    .ev {
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .ev.t1 { background: #58a6ff22; color: var(--thread1); }
+    .ev.t2 { background: #d2a8ff22; color: var(--thread2); }
+    .ev.bad { background: #ff7b7233; color: var(--danger); border: 1px solid var(--danger); }
+  </style>
+</head>
+<body>
+  <h1>Why StringBuilder Loses Characters</h1>
+  <p class="subtitle">
+    Task 2 visualized: each <code>append()</code> is multiple steps (read count → write chars → update count).
+    Without a lock, two threads can interleave and overwrite each other. Click <strong>Play race animation</strong> to watch it happen.
+  </p>
+
+  <div class="controls">
+    <button class="primary" id="btnPlay">▶ Play race animation</button>
+    <button id="btnStep">Step forward</button>
+    <button id="btnReset">Reset</button>
+    <span style="color: var(--muted); font-size: 0.8rem;" id="status">Ready</span>
+  </div>
+
+  <div class="layout">
+    <!-- StringBuilder -->
+    <div class="panel builder">
+      <h2>StringBuilder</h2>
+      <span class="tag unsafe">NOT synchronized — shared = unsafe</span>
+
+      <div class="state-row">
+        <div class="count-box">
+          <span>count (length)</span>
+          <strong id="builderCount">0</strong>
+        </div>
+        <div class="lock-box unlocked" id="builderLock">
+          🔓 no lock
+        </div>
+      </div>
+
+      <div style="font-size: 0.72rem; color: var(--muted); margin-bottom: 6px;">internal char[] buffer</div>
+      <div class="buffer-visual" id="builderCells"></div>
+
+      <div class="threads">
+        <div class="thread t1" id="builderT1">
+          <div class="name">Thread T1 — appending "AB"</div>
+          <div id="builderT1Status">Waiting…</div>
+        </div>
+        <div class="thread t2" id="builderT2">
+          <div class="name">Thread T2 — appending "AB"</div>
+          <div id="builderT2Status">Waiting…</div>
+        </div>
+      </div>
+
+      <div class="step-log" id="builderLog">Press Play to start the race…</div>
+    </div>
+
+    <!-- StringBuffer -->
+    <div class="panel buffer">
+      <h2>StringBuffer</h2>
+      <span class="tag safe">synchronized — one thread at a time</span>
+
+      <div class="state-row">
+        <div class="count-box">
+          <span>count (length)</span>
+          <strong id="bufferCount">0</strong>
+        </div>
+        <div class="lock-box locked" id="bufferLock">
+          🔒 lock available
+        </div>
+      </div>
+
+      <div style="font-size: 0.72rem; color: var(--muted); margin-bottom: 6px;">internal char[] buffer</div>
+      <div class="buffer-visual" id="bufferCells"></div>
+
+      <div class="threads">
+        <div class="thread t1" id="bufferT1">
+          <div class="name">Thread T1 — appending "AB"</div>
+          <div id="bufferT1Status">Waiting…</div>
+        </div>
+        <div class="thread t2" id="bufferT2">
+          <div class="name">Thread T2 — appending "AB"</div>
+          <div id="bufferT2Status">Waiting…</div>
+        </div>
+      </div>
+
+      <div class="step-log" id="bufferLog">Same two threads — but append() is locked…</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <h3>Interleaving timeline (StringBuilder race)</h3>
+    <div class="timeline-track">
+      <div class="timeline-label">T1</div>
+      <div class="timeline-events" id="timelineT1"></div>
+      <div class="timeline-label">T2</div>
+      <div class="timeline-events" id="timelineT2"></div>
+    </div>
+  </div>
+
+  <div class="result-bar" id="resultBar">
+    Expected final string: <strong>"ABAB"</strong> (4 chars) &nbsp;|&nbsp;
+    StringBuilder: <strong id="resBuilder">—</strong> &nbsp;|&nbsp;
+    StringBuffer: <strong id="resBuffer">—</strong>
+  </div>
+
+  <div class="explain">
+    <h3>What went wrong? (the 3-step append)</h3>
+    <ol>
+      <li><strong>READ count</strong> — both threads see <code>count = 0</code> at the same time.</li>
+      <li><strong>WRITE chars</strong> — T1 writes "A","B" at index 0,1. T2 also writes "A","B" starting at index 0 (because it still thinks count is 0!) → <strong>overwrite</strong>.</li>
+      <li><strong>UPDATE count</strong> — both set count to 2. Final count is 2, not 4. Two characters <strong>lost</strong>.</li>
+      <li><strong>StringBuffer fix</strong> — <code>synchronized append()</code> means T2 waits until T1 finishes all 3 steps. Result: "ABAB", count = 4.</li>
+    </ol>
+  </div>
+
+  <script>
+    const CAPACITY = 8;
+    const TOKEN = ["A", "B"];
+    const EXPECTED = "ABAB";
+
+    // Animation steps for StringBuilder (classic lost-update race)
+    const raceSteps = [
+      { side: "builder", thread: 1, action: "read",  msg: "T1: read count → 0", tl: "read count=0" },
+      { side: "builder", thread: 2, action: "read",  msg: "T2: read count → 0  ⚠️ both see 0!", tl: "read count=0", bad: true },
+      { side: "builder", thread: 1, action: "write", idx: 0, char: "A", msg: "T1: write 'A' at index 0" },
+      { side: "builder", thread: 2, action: "write", idx: 0, char: "A", msg: "T2: write 'A' at index 0  ⚠️ OVERWRITE!", tl: "write A @0 OVERWRITE", bad: true },
+      { side: "builder", thread: 1, action: "write", idx: 1, char: "B", msg: "T1: write 'B' at index 1" },
+      { side: "builder", thread: 2, action: "write", idx: 1, char: "B", msg: "T2: write 'B' at index 1  ⚠️ OVERWRITE!", tl: "write B @1 OVERWRITE", bad: true },
+      { side: "builder", thread: 1, action: "setCount", count: 2, msg: "T1: set count = 2" },
+      { side: "builder", thread: 2, action: "setCount", count: 2, msg: "T2: set count = 2  ⚠️ should be 4!", tl: "set count=2 LOST 2", bad: true },
+    ];
+
+    // StringBuffer: sequential locked appends
+    const safeSteps = [
+      { side: "buffer", thread: 1, action: "lock",   msg: "T1: acquire lock 🔒" },
+      { side: "buffer", thread: 1, action: "read",   msg: "T1: read count → 0" },
+      { side: "buffer", thread: 1, action: "write", idx: 0, char: "A", msg: "T1: write 'A' @0" },
+      { side: "buffer", thread: 1, action: "write", idx: 1, char: "B", msg: "T1: write 'B' @1" },
+      { side: "buffer", thread: 1, action: "setCount", count: 2, msg: "T1: set count = 2" },
+      { side: "buffer", thread: 1, action: "unlock", msg: "T1: release lock 🔓" },
+      { side: "buffer", thread: 2, action: "lock",   msg: "T2: acquire lock 🔒 (waited for T1)" },
+      { side: "buffer", thread: 2, action: "read",   msg: "T2: read count → 2" },
+      { side: "buffer", thread: 2, action: "write", idx: 2, char: "A", msg: "T2: write 'A' @2" },
+      { side: "buffer", thread: 2, action: "write", idx: 3, char: "B", msg: "T2: write 'B' @3" },
+      { side: "buffer", thread: 2, action: "setCount", count: 4, msg: "T2: set count = 4 ✓" },
+      { side: "buffer", thread: 2, action: "unlock", msg: "T2: release lock 🔓" },
+    ];
+
+    let builderState = { cells: Array(CAPACITY).fill(""), count: 0, locked: false };
+    let bufferState  = { cells: Array(CAPACITY).fill(""), count: 0, locked: false };
+    let stepIndex = 0;
+    let playing = false;
+    let playTimer = null;
+
+    function renderCells(containerId, state, highlights) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = "";
+      for (let i = 0; i < CAPACITY; i++) {
+        const div = document.createElement("div");
+        div.className = "cell";
+        if (state.cells[i]) {
+          div.textContent = state.cells[i];
+          div.classList.add("filled");
+          if (i < state.count) {
+            if (highlights?.lost && i < 2) div.classList.add("lost");
+          }
+        } else {
+          div.textContent = i;
+          div.style.opacity = "0.35";
+        }
+        if (highlights?.t1 === i) div.classList.add("highlight-t1");
+        if (highlights?.t2 === i) div.classList.add("highlight-t2");
+        el.appendChild(div);
+      }
+    }
+
+    function getString(state) {
+      return state.cells.slice(0, state.count).join("");
+    }
+
+    function updateUI(highlightBuilder, highlightBuffer) {
+      document.getElementById("builderCount").textContent = builderState.count;
+      document.getElementById("bufferCount").textContent = bufferState.count;
+
+      const bLock = document.getElementById("builderLock");
+      bLock.textContent = "🔓 no lock";
+      bLock.className = "lock-box unlocked";
+
+      const bufLock = document.getElementById("bufferLock");
+      bufLock.textContent = bufferState.locked ? "🔒 locked (T busy)" : "🔓 lock free";
+      bufLock.className = "lock-box " + (bufferState.locked ? "locked" : "unlocked");
+
+      const lost = builderState.count < 4 && stepIndex > 0;
+      renderCells("builderCells", builderState, { ...highlightBuilder, lost });
+      renderCells("bufferCells", bufferState, highlightBuffer);
+
+      document.getElementById("resBuilder").textContent = `"${getString(builderState)}" (count=${builderState.count})`;
+      document.getElementById("resBuffer").textContent = `"${getString(bufferState)}" (count=${bufferState.count})`;
+
+      const bStr = getString(builderState);
+      const bufStr = getString(bufferState);
+      const bar = document.getElementById("resultBar");
+      if (stepIndex >= raceSteps.length) {
+        bar.style.borderColor = bStr.length < 4 ? "var(--danger)" : "var(--border)";
+      }
+    }
+
+    function log(side, msg, cls) {
+      const el = document.getElementById(side + "Log");
+      const line = document.createElement("div");
+      line.className = cls || "active";
+      line.textContent = msg;
+      el.appendChild(line);
+      el.scrollTop = el.scrollHeight;
+    }
+
+    function addTimeline(thread, text, bad) {
+      const id = thread === 1 ? "timelineT1" : "timelineT2";
+      const el = document.createElement("span");
+      el.className = "ev t" + thread + (bad ? " bad" : "");
+      el.textContent = text;
+      document.getElementById(id).appendChild(el);
+    }
+
+    function setThreadStatus(side, thread, text) {
+      document.getElementById(side + "T" + thread + "Status").textContent = text;
+    }
+
+    function applyStep(step) {
+      const state = step.side === "builder" ? builderState : bufferState;
+      const hlB = {};
+      const hlBuf = {};
+
+      if (step.action === "lock") {
+        state.locked = true;
+        setThreadStatus(step.side, step.thread, "🔒 holds lock, running append…");
+        log(step.side, step.msg, "good");
+      } else if (step.action === "unlock") {
+        state.locked = false;
+        setThreadStatus(step.side, step.thread, "✓ done");
+        log(step.side, step.msg, "good");
+      } else if (step.action === "read") {
+        setThreadStatus(step.side, step.thread, `read count = ${state.count}`);
+        log(step.side, step.msg, step.bad ? "bad" : "active");
+        if (step.tl) addTimeline(step.thread, step.tl, step.bad);
+      } else if (step.action === "write") {
+        state.cells[step.idx] = step.char;
+        if (step.side === "builder") hlB["t" + step.thread] = step.idx;
+        else hlBuf["t" + step.thread] = step.idx;
+        setThreadStatus(step.side, step.thread, `writing '${step.char}' at index ${step.idx}`);
+        log(step.side, step.msg, step.bad ? "bad" : "active");
+        if (step.tl) addTimeline(step.thread, step.tl, step.bad);
+      } else if (step.action === "setCount") {
+        state.count = step.count;
+        log(step.side, step.msg, step.bad ? "bad" : "good");
+        if (step.tl) addTimeline(step.thread, step.tl, step.bad);
+      }
+
+      updateUI(hlB, hlBuf);
+    }
+
+    function reset() {
+      if (playTimer) clearInterval(playTimer);
+      playing = false;
+      stepIndex = 0;
+      builderState = { cells: Array(CAPACITY).fill(""), count: 0, locked: false };
+      bufferState  = { cells: Array(CAPACITY).fill(""), count: 0, locked: false };
+
+      document.getElementById("builderLog").innerHTML = "Press Play to start the race…";
+      document.getElementById("bufferLog").innerHTML = "Same two threads — but append() is locked…";
+      document.getElementById("timelineT1").innerHTML = "";
+      document.getElementById("timelineT2").innerHTML = "";
+      document.getElementById("status").textContent = "Ready";
+
+      ["builder", "buffer"].forEach(s => {
+        [1, 2].forEach(t => setThreadStatus(s, t, "Waiting…"));
+      });
+
+      updateUI({}, {});
+    }
+
+    function runNextStep() {
+      // Interleave: run builder race steps first, then catch up buffer at end
+      if (stepIndex < raceSteps.length) {
+        applyStep(raceSteps[stepIndex]);
+        document.getElementById("status").textContent = `Race step ${stepIndex + 1} / ${raceSteps.length}`;
+        stepIndex++;
+        return stepIndex <= raceSteps.length;
+      }
+
+      // After race shown, animate buffer safe path
+      const safeIdx = stepIndex - raceSteps.length;
+      if (safeIdx < safeSteps.length) {
+        applyStep(safeSteps[safeIdx]);
+        document.getElementById("status").textContent = `Safe path step ${safeIdx + 1} / ${safeSteps.length}`;
+        stepIndex++;
+        return true;
+      }
+
+      document.getElementById("status").textContent = "Done — re-run or Reset";
+      return false;
+    }
+
+    function play() {
+      if (playing) return;
+      if (stepIndex >= raceSteps.length + safeSteps.length) reset();
+      playing = true;
+      playTimer = setInterval(() => {
+        const cont = runNextStep();
+        if (!cont) {
+          clearInterval(playTimer);
+          playing = false;
+        }
+      }, 1400);
+    }
+
+    document.getElementById("btnPlay").addEventListener("click", () => {
+      if (stepIndex >= raceSteps.length + safeSteps.length) reset();
+      if (!playing) {
+        if (stepIndex === 0) {
+          document.getElementById("builderLog").innerHTML = "";
+          document.getElementById("bufferLog").innerHTML = "";
+        }
+        play();
+      }
+    });
+
+    document.getElementById("btnStep").addEventListener("click", () => {
+      if (stepIndex >= raceSteps.length + safeSteps.length) reset();
+      if (stepIndex === 0) {
+        document.getElementById("builderLog").innerHTML = "";
+        document.getElementById("bufferLog").innerHTML = "";
+      }
+      runNextStep();
+    });
+
+    document.getElementById("btnReset").addEventListener("click", reset);
+
+    reset();
+  </script>
+</body>
+</html>
