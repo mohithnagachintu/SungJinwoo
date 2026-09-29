@@ -1,0 +1,302 @@
+Langchain/.cursor/rules/codeguard-0-additional-cryptography.mdc
+  h_7225d40a6d1eb9 1-58
+Langchain/.cursor/rules/codeguard-0-api-web-services.mdc
+  h_7225d40a6d1eb9 1-73
+Langchain/.cursor/rules/codeguard-0-authentication-mfa.mdc
+  h_7225d40a6d1eb9 1-93
+Langchain/.cursor/rules/codeguard-0-authorization-access-control.mdc
+  h_7225d40a6d1eb9 1-51
+Langchain/.cursor/rules/codeguard-0-client-side-web-security.mdc
+  h_7225d40a6d1eb9 1-106
+Langchain/.cursor/rules/codeguard-0-cloud-orchestration-kubernetes.mdc
+  h_7225d40a6d1eb9 1-32
+Langchain/.cursor/rules/codeguard-0-data-storage.mdc
+  h_7225d40a6d1eb9 1-72
+Langchain/.cursor/rules/codeguard-0-devops-ci-cd-containers.mdc
+  h_7225d40a6d1eb9 1-58
+Langchain/.cursor/rules/codeguard-0-file-handling-and-uploads.mdc
+  h_7225d40a6d1eb9 1-67
+Langchain/.cursor/rules/codeguard-0-framework-and-languages.mdc
+  h_7225d40a6d1eb9 1-111
+Langchain/.cursor/rules/codeguard-0-iac-security.mdc
+  h_7225d40a6d1eb9 1-79
+Langchain/.cursor/rules/codeguard-0-input-validation-injection.mdc
+  h_7225d40a6d1eb9 1-85
+Langchain/.cursor/rules/codeguard-0-logging.mdc
+  h_7225d40a6d1eb9 1-42
+Langchain/.cursor/rules/codeguard-0-mobile-apps.mdc
+  h_7225d40a6d1eb9 1-108
+Langchain/.cursor/rules/codeguard-0-privacy-data-protection.mdc
+  h_7225d40a6d1eb9 1-19
+Langchain/.cursor/rules/codeguard-0-safe-c-functions.mdc
+  h_7225d40a6d1eb9 1-328
+Langchain/.cursor/rules/codeguard-0-session-management-and-cookies.mdc
+  h_7225d40a6d1eb9 1-70
+Langchain/.cursor/rules/codeguard-0-supply-chain-security.mdc
+  h_7225d40a6d1eb9 1-47
+Langchain/.cursor/rules/codeguard-0-xml-and-serialization.mdc
+  h_7225d40a6d1eb9 1-102
+Langchain/.cursor/rules/codeguard-1-crypto-algorithms.mdc
+  h_7225d40a6d1eb9 1-136
+Langchain/.cursor/rules/codeguard-1-digital-certificates.mdc
+  h_7225d40a6d1eb9 1-123
+Langchain/.cursor/rules/codeguard-1-hardcoded-credentials.mdc
+  h_7225d40a6d1eb9 1-45
+Langchain/.gitignore
+  h_7225d40a6d1eb9 1-6
+Langchain/001_Intro_Deep_Agents/.env.example
+  h_7225d40a6d1eb9 1-25
+Langchain/001_Intro_Deep_Agents/README.md
+  h_7225d40a6d1eb9 1-142
+Langchain/001_Intro_Deep_Agents/env_utils.py
+  h_7225d40a6d1eb9 1-492
+Langchain/001_Intro_Deep_Agents/m1/.mcp.json
+  h_7225d40a6d1eb9 1-11
+Langchain/001_Intro_Deep_Agents/m1/Practice/judge_card_helpers.py
+  h_7225d40a6d1eb9 1-472
+Langchain/001_Intro_Deep_Agents/m1/Practice/judge_card_practice.py
+  h_7225d40a6d1eb9 1-256
+Langchain/001_Intro_Deep_Agents/m1/Practice/judge_card_practice_filled.py
+  h_7225d40a6d1eb9 1-158
+Langchain/001_Intro_Deep_Agents/m1/customers_seed.sql
+  h_7225d40a6d1eb9 1-45
+Langchain/001_Intro_Deep_Agents/m1/gh_auth/github_agent.py
+  h_7225d40a6d1eb9 1-193
+Langchain/001_Intro_Deep_Agents/m1/gh_auth/step1.py
+  h_7225d40a6d1eb9 1-143
+Langchain/001_Intro_Deep_Agents/m1/gh_auth/step2.py
+  h_7225d40a6d1eb9 1-174
+Langchain/001_Intro_Deep_Agents/m1/gh_auth/step3.py
+  h_7225d40a6d1eb9 1-189
+Langchain/001_Intro_Deep_Agents/m1/m1.2_scratch_agent.py
+  h_7225d40a6d1eb9 1-9
+Langchain/001_Intro_Deep_Agents/m1/m1.4_homework.py
+  h_7225d40a6d1eb9 1-77
+Langchain/001_Intro_Deep_Agents/m1/m1.4_homework_filled.py
+  h_7225d40a6d1eb9 1-42
+Langchain/001_Intro_Deep_Agents/m1/m1.4_scratch_agent_butler.py
+  h_7225d40a6d1eb9 1-21
+Langchain/001_Intro_Deep_Agents/m1/m1.4_scratch_agent_butler_extra_posh.py
+  h_7225d40a6d1eb9 1-91
+Langchain/001_Intro_Deep_Agents/m1/m1.5_homework.py
+  h_7225d40a6d1eb9 1-88
+Langchain/001_Intro_Deep_Agents/m1/m1.5_homework_filled.py
+  h_7225d40a6d1eb9 1-56
+Langchain/001_Intro_Deep_Agents/m1/m1.5_scratch_agent_tools.py
+  h_7225d40a6d1eb9 1-45
+Langchain/001_Intro_Deep_Agents/m1/m1.6_agent_mcp.py
+  h_7225d40a6d1eb9 1-39
+Langchain/001_Intro_Deep_Agents/m1/m1.6_homework.py
+  h_7225d40a6d1eb9 1-82
+Langchain/001_Intro_Deep_Agents/m1/m1.6_homework_filled.py
+  h_7225d40a6d1eb9 1-46
+Langchain/001_Intro_Deep_Agents/m1/m1.7_homework.py
+  h_7225d40a6d1eb9 1-84
+Langchain/001_Intro_Deep_Agents/m1/m1.7_homework_filled.py
+  h_7225d40a6d1eb9 1-66
+Langchain/001_Intro_Deep_Agents/m1/m1.7_messages_threads_checkpointers.py
+  h_7225d40a6d1eb9 1-33
+Langchain/001_Intro_Deep_Agents/m1/m1.8_hitl.py
+  h_7225d40a6d1eb9 1-76
+Langchain/001_Intro_Deep_Agents/m1/m1.8_hitl_respond.py
+  h_7225d40a6d1eb9 1-104
+Langchain/001_Intro_Deep_Agents/m1/m1.8_homework.py
+  h_7225d40a6d1eb9 1-134
+Langchain/001_Intro_Deep_Agents/m1/m1.8_homework_filled.py
+  h_7225d40a6d1eb9 1-81
+Langchain/001_Intro_Deep_Agents/m2/m2.2_agent.py
+  h_7225d40a6d1eb9 1-57
+Langchain/001_Intro_Deep_Agents/m2/m2.2_homework.py
+  h_7225d40a6d1eb9 1-86
+Langchain/001_Intro_Deep_Agents/m2/m2.2_homework_filled.py
+  h_7225d40a6d1eb9 1-50
+Langchain/001_Intro_Deep_Agents/m2/m2.3_homework.py
+  h_7225d40a6d1eb9 1-137
+Langchain/001_Intro_Deep_Agents/m2/m2.3_homework_filled.py
+  h_7225d40a6d1eb9 1-62
+Langchain/001_Intro_Deep_Agents/m2/m2.3_sales_agent.py
+  h_7225d40a6d1eb9 1-68
+Langchain/001_Intro_Deep_Agents/m2/m2.3_sandbox_agent.py
+  h_7225d40a6d1eb9 1-39
+Langchain/001_Intro_Deep_Agents/m2/m2.4_eval_agent.py
+  h_7225d40a6d1eb9 1-22
+Langchain/001_Intro_Deep_Agents/m2/m2.4_homework.py
+  h_7225d40a6d1eb9 1-114
+Langchain/001_Intro_Deep_Agents/m2/m2.4_homework_filled.py
+  h_7225d40a6d1eb9 1-115
+Langchain/001_Intro_Deep_Agents/m2/m2.4_interpreter_agent.py
+  h_7225d40a6d1eb9 1-84
+Langchain/001_Intro_Deep_Agents/m3/m3.1_homework.py
+  h_7225d40a6d1eb9 1-146
+Langchain/001_Intro_Deep_Agents/m3/m3.1_homework_filled.py
+  h_7225d40a6d1eb9 1-100
+Langchain/001_Intro_Deep_Agents/m3/m3.1_summarization.py
+  h_7225d40a6d1eb9 1-73
+Langchain/001_Intro_Deep_Agents/m3/m3.2_homework.py
+  h_7225d40a6d1eb9 1-137
+Langchain/001_Intro_Deep_Agents/m3/m3.2_homework_filled.py
+  h_7225d40a6d1eb9 1-110
+Langchain/001_Intro_Deep_Agents/m3/m3.2_scratch_agent_skills.py
+  h_7225d40a6d1eb9 1-20
+Langchain/001_Intro_Deep_Agents/m3/m3.3_homework.py
+  h_7225d40a6d1eb9 1-143
+Langchain/001_Intro_Deep_Agents/m3/m3.3_homework_filled.py
+  h_7225d40a6d1eb9 1-108
+Langchain/001_Intro_Deep_Agents/m3/m3.3_memory_agent.py
+  h_7225d40a6d1eb9 1-87
+Langchain/001_Intro_Deep_Agents/m3/skills/draft-pitch/SKILL.md
+  h_7225d40a6d1eb9 1-20
+Langchain/001_Intro_Deep_Agents/m3/skills/qualify-lead/SKILL.md
+  h_7225d40a6d1eb9 1-24
+Langchain/001_Intro_Deep_Agents/m4/data/epic_corpus.txt
+  h_7225d40a6d1eb9 1-41798
+Langchain/001_Intro_Deep_Agents/m4/data/epic_corpus_key.json
+  h_7225d40a6d1eb9 1-72
+Langchain/001_Intro_Deep_Agents/m4/data/prepare_corpus.py
+  h_7225d40a6d1eb9 1-160
+Langchain/001_Intro_Deep_Agents/m4/m4.2_homework.py
+  h_7225d40a6d1eb9 1-151
+Langchain/001_Intro_Deep_Agents/m4/m4.2_homework_filled.py
+  h_7225d40a6d1eb9 1-126
+Langchain/001_Intro_Deep_Agents/m4/m4.2_run_newsletter.py
+  h_7225d40a6d1eb9 1-63
+Langchain/001_Intro_Deep_Agents/m4/m4.3_homework.py
+  h_7225d40a6d1eb9 1-132
+Langchain/001_Intro_Deep_Agents/m4/m4.3_homework_filled.py
+  h_7225d40a6d1eb9 1-111
+Langchain/001_Intro_Deep_Agents/m4/m4.3_run_manuscript.py
+  h_7225d40a6d1eb9 1-39
+Langchain/001_Intro_Deep_Agents/m4/m4_2_newsletter_agent.py
+  h_7225d40a6d1eb9 1-158
+Langchain/001_Intro_Deep_Agents/m4/m4_3_manuscript_agent.py
+  h_7225d40a6d1eb9 1-81
+Langchain/001_Intro_Deep_Agents/m5/async_lab/main_agent/agent.py
+  h_7225d40a6d1eb9 1-43
+Langchain/001_Intro_Deep_Agents/m5/async_lab/main_agent/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/async_lab/specialized_agent/agent.py
+  h_7225d40a6d1eb9 1-58
+Langchain/001_Intro_Deep_Agents/m5/async_lab/specialized_agent/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/async_lab/specialized_agent/pyproject.toml
+  h_7225d40a6d1eb9 1-16
+Langchain/001_Intro_Deep_Agents/m5/async_lab/specialized_agent/uv.lock
+  h_7225d40a6d1eb9 1-2396
+Langchain/001_Intro_Deep_Agents/m5/hello/agent.py
+  h_7225d40a6d1eb9 1-14
+Langchain/001_Intro_Deep_Agents/m5/hello/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/homework/agent.py
+  h_7225d40a6d1eb9 1-45
+Langchain/001_Intro_Deep_Agents/m5/homework/call_agent_api.py
+  h_7225d40a6d1eb9 1-64
+Langchain/001_Intro_Deep_Agents/m5/homework/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/homework_filled/agent.py
+  h_7225d40a6d1eb9 1-38
+Langchain/001_Intro_Deep_Agents/m5/homework_filled/call_agent_api.py
+  h_7225d40a6d1eb9 1-39
+Langchain/001_Intro_Deep_Agents/m5/homework_filled/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/AGENTS.md
+  h_7225d40a6d1eb9 1-45
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/agent.py
+  h_7225d40a6d1eb9 1-59
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/agents/chinook-analyst/AGENTS.md
+  h_7225d40a6d1eb9 1-50
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/langgraph.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/langgraph_sandbox.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/mcp/mail_store.py
+  h_7225d40a6d1eb9 1-57
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/mcp/mock_mail_server.py
+  h_7225d40a6d1eb9 1-82
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/mcp/seeds/incoming_rfq.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/mcp/send_to_inbox.py
+  h_7225d40a6d1eb9 1-65
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/skills/rfq-quote/SKILL.md
+  h_7225d40a6d1eb9 1-62
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/skills/territory-report/SKILL.md
+  h_7225d40a6d1eb9 1-37
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/skills/weekly-newsletter/SKILL.md
+  h_7225d40a6d1eb9 1-46
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/start.sh
+  h_7225d40a6d1eb9 1-38
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/subagents.py
+  h_7225d40a6d1eb9 1-175
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/test_diagnostic.py
+  h_7225d40a6d1eb9 1-350
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/test_lesson_prompts.py
+  h_7225d40a6d1eb9 1-127
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/tools/__init__.py
+  h_7225d40a6d1eb9 1-2
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/tools/chart.py
+  h_7225d40a6d1eb9 1-51
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/tools/html.py
+  h_7225d40a6d1eb9 1-46
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/tools/search.py
+  h_7225d40a6d1eb9 1-24
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant/tools/sql.py
+  h_7225d40a6d1eb9 1-157
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/AGENTS.md
+  h_7225d40a6d1eb9 1-50
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/agent.py
+  h_7225d40a6d1eb9 1-169
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/async_research.py
+  h_7225d40a6d1eb9 1-26
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/langgraph.json
+  h_7225d40a6d1eb9 1-8
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/mcp/mail_store.py
+  h_7225d40a6d1eb9 1-57
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/mcp/mock_mail_server.py
+  h_7225d40a6d1eb9 1-82
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/mcp/seeds/incoming_rfq.json
+  h_7225d40a6d1eb9 1-7
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/mcp/send_to_inbox.py
+  h_7225d40a6d1eb9 1-65
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/newsletter_agent_graph.py
+  h_7225d40a6d1eb9 1-108
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/skills/rfq-quote/SKILL.md
+  h_7225d40a6d1eb9 1-62
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/skills/territory-report/SKILL.md
+  h_7225d40a6d1eb9 1-53
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/skills/weekly-newsletter/SKILL.md
+  h_7225d40a6d1eb9 1-65
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/start.sh
+  h_7225d40a6d1eb9 1-84
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/stop_sandboxes.py
+  h_7225d40a6d1eb9 1-41
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/subagents.py
+  h_7225d40a6d1eb9 1-154
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/test_diagnostic.py
+  h_7225d40a6d1eb9 1-426
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/test_lesson_prompts.py
+  h_7225d40a6d1eb9 1-127
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/tools/__init__.py
+  h_7225d40a6d1eb9 1-2
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/tools/html.py
+  h_7225d40a6d1eb9 1-46
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/tools/search.py
+  h_7225d40a6d1eb9 1-43
+Langchain/001_Intro_Deep_Agents/m5/sales_assistant_sandbox/tools/sql.py
+  h_7225d40a6d1eb9 1-157
+Langchain/001_Intro_Deep_Agents/models.py
+  h_7225d40a6d1eb9 1-105
+Langchain/001_Intro_Deep_Agents/pyproject.toml
+  h_7225d40a6d1eb9 1-57
+Langchain/001_Intro_Deep_Agents/uv.lock
+  h_7225d40a6d1eb9 1-4568
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d7db384f714be56addeeef34db67e425d347ff11",
+  "prompts": {},
+  "humans": {
+    "h_7225d40a6d1eb9": {
+      "author": "Appasamudram Naga Mohith (amohith) <amohith@cisco.com>"
+    }
+  }
+}
