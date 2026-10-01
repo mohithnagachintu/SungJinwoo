@@ -1,0 +1,19 @@
+.gitignore
+  s_dbad7799fb5d0c::t_392b783b5ced0c 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3974d865e515ef4ad66e6eeaecbce997f6434270",
+  "prompts": {},
+  "sessions": {
+    "s_dbad7799fb5d0c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b058f242-fea1-44b1-bcb1-81f5c227f184",
+        "model": "auto-smart"
+      },
+      "human_author": "Appasamudram Naga Mohith (amohith) <amohith@cisco.com>"
+    }
+  }
+}
