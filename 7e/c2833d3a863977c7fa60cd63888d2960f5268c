@@ -1,0 +1,66 @@
+FastAPI/src/fastapi_app/modules/users/schemas.py
+  h_7225d40a6d1eb9 1-17
+FastAPI/src/fastapi_app/db/migrations/versions/122ce90918ef_use_timestamptz_for_user_timestamps.py
+  s_a73c189d733820::t_9ba2f870272e31 1-46
+FastAPI/src/fastapi_app/api/deps.py
+  h_7225d40a6d1eb9 1-28
+FastAPI/src/fastapi_app/modules/users/models.py
+  s_a73c189d733820::t_f57b172ed70e56 4
+  h_7225d40a6d1eb9 1-3,5-38,41-42,46
+  s_a73c189d733820::t_233a4d72bb1c46 39-40,43-45
+FastAPI/src/fastapi_app/modules/users/service.py
+  h_7225d40a6d1eb9 1-43
+FastAPI/FASTAPI_AZ_PROJECT_PLAN.md
+  s_a73c189d733820::t_e6cc9622448abe 1985,1990,1995,2000,2012,2017,2022,2027,2032,2037,2054
+  s_a73c189d733820::t_3c6d9e9e841493 1655,1948,1953,1958,1963,1968,1973,2637,2647
+FastAPI/docker-compose.yaml
+  h_7225d40a6d1eb9 1-14
+FastAPI/src/fastapi_app/db/base.py
+  h_7225d40a6d1eb9 1-4
+FastAPI/src/fastapi_app/db/models.py
+  h_7225d40a6d1eb9 1-8
+FastAPI/src/fastapi_app/db/migrations/env.py
+  h_7225d40a6d1eb9 1-98
+FastAPI/src/fastapi_app/modules/users/repository.py
+  h_7225d40a6d1eb9 1-38
+FastAPI/src/fastapi_app/api/v1/health.py
+  h_7225d40a6d1eb9 1-2,7-8,24-45
+  s_a73c189d733820::t_3a0fff8d869e7b 3-4,6
+FastAPI/src/fastapi_app/core/security.py
+  h_7225d40a6d1eb9 1-13
+FastAPI/src/fastapi_app/db/session.py
+  h_7225d40a6d1eb9 1-19
+FastAPI/alembic.ini
+  h_7225d40a6d1eb9 1-149
+FastAPI/pyproject.toml
+  h_7225d40a6d1eb9 14-16,40
+FastAPI/src/fastapi_app/db/migrations/README
+  h_7225d40a6d1eb9 1
+FastAPI/src/fastapi_app/db/migrations/script.py.mako
+  h_7225d40a6d1eb9 1-28
+FastAPI/src/fastapi_app/db/migrations/versions/fa1b07d4d970_create_users_table.py
+  h_7225d40a6d1eb9 1-41
+FastAPI/uv.lock
+  h_7225d40a6d1eb9 58-111,145-203,290-292,312-314,451,453,461,463,470,472,480,482,650-663,673-716,1076-1084
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7ec2833d3a863977c7fa60cd63888d2960f5268c",
+  "prompts": {},
+  "humans": {
+    "h_7225d40a6d1eb9": {
+      "author": "Appasamudram Naga Mohith (amohith) <amohith@cisco.com>"
+    }
+  },
+  "sessions": {
+    "s_a73c189d733820": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "71ca4ee6-fca1-4bb1-afb4-eb50ebc6e4bf",
+        "model": "default"
+      },
+      "human_author": "Appasamudram Naga Mohith (amohith) <amohith@cisco.com>"
+    }
+  }
+}
